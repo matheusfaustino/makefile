@@ -16,5 +16,8 @@ syncr:
 run:
 	cd docker && docker-compose up -d
 
+stop:
+	cd docker && docker-compose stop
+
 create-container:
 	cd docker && docker-compose up -d --build
