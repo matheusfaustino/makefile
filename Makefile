@@ -21,3 +21,17 @@ stop:
 
 create-container:
 	cd docker && docker-compose up -d --build
+
+EDIRECTORY_BRANCH=v11.1
+rebase:
+	git stash
+	git checkout $(EDIRECTORY_BRANCH)
+	git pull
+	git checkout -
+	git rebase $(EDIRECTORY_BRANCH)
+	set -e ;\
+	BRANCH_TO_MERGE=$$(git symbolic-ref --short HEAD) ;\
+	git checkout $(EDIRECTORY_BRANCH) ;\
+	git merge $$BRANCH_TO_MERGE
+	git push
+	git stash pop
